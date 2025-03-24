@@ -1,131 +1,178 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import "tailwindcss/tailwind.css";
-import { Sun, Moon } from "lucide-react";
-// import test from "./assets/Games/cars/Image1.jpg";
+import React, { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+// import { Sun, Moon, RefreshCcw, Clock } from "lucide-react";
+import GameBoard from "./components/GameBoard";
+import GameControls from "./components/GameControls";
+import ThemeToggle from "./components/ThemeToggle";
+import Timer from "./components/Timer";
+import GameOver from "./components/GameOver";
+import "./App.css";
 
-const imageSets = {
-   cars: [...Array(8).keys()].flatMap((i) => [
-      `assets/Games/cars/Image${i + 1}.jpg`,
-      `assets/Games/cars/Image${i + 1}.jpg`,
-   ]),
-   arts: [...Array(8).keys()].flatMap((i) => [
-      `assets/Games/arts/Pic${i + 1}.jpg`,
-      `assets/Games/arts/Pic${i + 1}.jpg`,
-   ]),
-};
-
-const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
-
-function Card({ img, index, isFlipped, onClick }) {
-   return (
-      <motion.div
-         className="w-24 h-24 bg-gray-300 dark:bg-gray-700 flex items-center justify-center cursor-pointer"
-         onClick={() => onClick(index)}
-         animate={{ rotateY: isFlipped ? 0 : 180 }}
-         transition={{ duration: 0.5 }}>
-         {isFlipped && (
-            <img src={img} alt="" className="w-full h-full object-cover" />
-         )}
-      </motion.div>
-   );
-}
-
-function MemoryGame() {
+function Game() {
    const [gameType, setGameType] = useState("cars");
-   const [cards, setCards] = useState(shuffleArray([...imageSets[gameType]]));
-   const [selected, setSelected] = useState([]);
+   const [difficulty, setDifficulty] = useState("normal");
+   const [cards, setCards] = useState([]);
+   const [flipped, setFlipped] = useState([]);
    const [matched, setMatched] = useState([]);
-   const [timer, setTimer] = useState(30);
-   const [level, setLevel] = useState("normal");
-   const [darkMode, setDarkMode] = useState(false);
+   const [moves, setMoves] = useState(0);
+   const [gameOver, setGameOver] = useState(false);
+   const [isPlaying, setIsPlaying] = useState(false);
+   const [timeLeft, setTimeLeft] = useState(0);
+   const [isDarkMode, setIsDarkMode] = useState(false);
 
-   useEffect(() => {
-      if (selected.length === 2) {
-         const [first, second] = selected;
-         if (cards[first] === cards[second]) {
-            setMatched([...matched, first, second]);
-         }
-         setTimeout(() => setSelected([]), 1000);
-      }
-   }, [selected]);
-
-   useEffect(() => {
-      if (timer > 0) {
-         const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
-         return () => clearInterval(interval);
-      }
-   }, [timer]);
-
-   const handleClick = (index) => {
-      if (!selected.includes(index) && selected.length < 2) {
-         setSelected([...selected, index]);
-      }
+   // Timer settings based on difficulty
+   const timerSettings = {
+      slow: 120,
+      normal: 60,
+      fast: 30,
    };
 
-   const handleReset = () => {
-      setCards(shuffleArray([...imageSets[gameType]]));
-      setSelected([]);
+   // Initialize game
+   useEffect(() => {
+      resetGame();
+   }, [gameType]);
+
+   // Create and shuffle cards
+   const initializeCards = () => {
+      // Create array of 8 pairs of cards (16 total)
+      const cardImages = Array.from({ length: 8 }, (_, i) => ({
+         id: i,
+         image: `assets/Games/${gameType}/${
+            gameType === "cars" ? "Image" : "Pic"
+         }${i + 1}.jpg`,
+         matched: false,
+      }));
+
+      // Duplicate and shuffle
+      const shuffledCards = [...cardImages, ...cardImages]
+         .map((card) => ({ ...card, key: Math.random() }))
+         .sort(() => Math.random() - 0.5);
+
+      return shuffledCards;
+   };
+
+   // Reset game
+   const resetGame = () => {
+      setCards(initializeCards());
+      setFlipped([]);
       setMatched([]);
-      setTimer(level === "slow" ? 60 : level === "fast" ? 15 : 30);
+      setMoves(0);
+      setGameOver(false);
+      setTimeLeft(timerSettings[difficulty]);
+      setIsPlaying(false);
    };
 
-   const handleGameTypeChange = (e) => {
-      setGameType(e.target.value);
-      setCards(shuffleArray([...imageSets[e.target.value]]));
-      handleReset();
+   // Handle card click
+   const handleCardClick = (id, key) => {
+      // Start timer on first move
+      if (!isPlaying) {
+         setIsPlaying(true);
+      }
+
+      // Don't allow more than 2 cards flipped at once
+      if (flipped.length === 2) return;
+
+      // Don't allow already matched cards to be clicked
+      if (matched.includes(key)) return;
+
+      // Don't allow the same card to be clicked twice
+      if (flipped.length === 1 && flipped[0].key === key) return;
+
+      // Add card to flipped array
+      setFlipped([...flipped, { id, key }]);
+
+      // Check for matches when 2 cards are flipped
+      if (flipped.length === 1) {
+         setMoves(moves + 1);
+
+         // Check if ids match (same image)
+         if (flipped[0].id === id) {
+            // Match found
+            setMatched([...matched, flipped[0].key, key]);
+         }
+
+         // Reset flipped after delay
+         setTimeout(() => {
+            setFlipped([]);
+         }, 1000);
+      }
+   };
+
+   // Check for game over
+   useEffect(() => {
+      if (matched.length === 16) {
+         setGameOver(true);
+         setIsPlaying(false);
+      }
+   }, [matched]);
+
+   // Timer countdown
+   useEffect(() => {
+      let timer;
+      if (isPlaying && timeLeft > 0) {
+         timer = setTimeout(() => {
+            setTimeLeft(timeLeft - 1);
+         }, 1000);
+      } else if (isPlaying && timeLeft === 0) {
+         setGameOver(true);
+         setIsPlaying(false);
+      }
+
+      return () => clearTimeout(timer);
+   }, [isPlaying, timeLeft]);
+
+   // Toggle theme
+   const toggleTheme = () => {
+      setIsDarkMode(!isDarkMode);
+      document.documentElement.classList.toggle("dark");
    };
 
    return (
       <div
-         className={`flex flex-col items-center space-y-4 p-4 ${
-            darkMode ? "bg-gray-900 text-white" : "bg-white text-black"
+         className={`min-h-screen transition-colors duration-300 ${
+            isDarkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"
          }`}>
-         <h1 className="text-2xl font-bold">Memory Game</h1>
-         <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="absolute top-4 right-4 p-2 rounded-full bg-gray-300 dark:bg-gray-700 transition-transform transform hover:scale-110">
-            {darkMode ? <Sun size={24} /> : <Moon size={24} />}
-         </button>
-         <div className="flex space-x-4">
-            <select
-               onChange={handleGameTypeChange}
-               value={gameType}
-               className="border p-2 rounded bg-gray-200 dark:bg-gray-700">
-               <option value="cars">Cars</option>
-               <option value="arts">Arts</option>
-            </select>
-            <select
-               onChange={(e) => setLevel(e.target.value)}
-               value={level}
-               className="border p-2 rounded bg-gray-200 dark:bg-gray-700">
-               <option value="slow">Slow (60s)</option>
-               <option value="normal">Normal (30s)</option>
-               <option value="fast">Fast (15s)</option>
-            </select>
+         <div className="container mx-auto px-4 py-8">
+            <header className="flex justify-between items-center mb-8">
+               <h1 className="text-3xl font-bold">Memory Game</h1>
+               <ThemeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+            </header>
+
+            <GameControls
+               gameType={gameType}
+               setGameType={setGameType}
+               difficulty={difficulty}
+               setDifficulty={setDifficulty}
+               resetGame={resetGame}
+               isPlaying={isPlaying}
+            />
+
+            <div className="flex justify-between items-center mb-4">
+               <div className="text-lg font-medium">Moves: {moves}</div>
+               <Timer timeLeft={timeLeft} isPlaying={isPlaying} />
+            </div>
+
+            <GameBoard
+               cards={cards}
+               flipped={flipped}
+               matched={matched}
+               handleCardClick={handleCardClick}
+               isDarkMode={isDarkMode}
+            />
+
+            <AnimatePresence>
+               {gameOver && (
+                  <GameOver
+                     won={matched.length === 16}
+                     moves={moves}
+                     resetGame={resetGame}
+                     isDarkMode={isDarkMode}
+                  />
+               )}
+            </AnimatePresence>
          </div>
-         <div className="grid grid-cols-4 gap-4">
-            {cards.map((img, index) => (
-               <Card
-                  key={index}
-                  img={img}
-                  index={index}
-                  isFlipped={
-                     selected.includes(index) || matched.includes(index)
-                  }
-                  onClick={handleClick}
-               />
-            ))}
-         </div>
-         <p className="text-lg">Time Left: {timer}s</p>
-         <button
-            onClick={handleReset}
-            className="bg-blue-500 text-white px-4 py-2 rounded">
-            Reset
-         </button>
       </div>
    );
 }
 
-export default MemoryGame;
+export default Game;
