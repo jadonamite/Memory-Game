@@ -35,8 +35,8 @@ export default function Game() {
       const cardImages = Array.from({ length: 8 }, (_, i) => ({
          id :  i,
          image: `assets/Games/${gameType}/${
-            gameType === "cars" ? "Image" : "Pics"
+            gameType === "cars" ? "Image" : "Pic"
          }/${i + 1}.jpg`,
           matched: false,
    }));
-}
+
