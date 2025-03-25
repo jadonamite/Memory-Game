@@ -29,15 +29,14 @@ export default function Game() {
    }
    useEffect(() => {
       resetGame();
-   },[gametype]);
+   },[gameType]);
 
    const initializeCards = () => {   
-      const cardImages = Array.from({ length: 8 }, (_, i) => {
+      const cardImages = Array.from({ length: 8 }, (_, i) => ({
          id :  i,
-         image: `assets/Games/${gametype}/${
-            gameType === "Cars" ? "Image" : "Pics"
-
-
-         }.jpg`
-
+         image: `assets/Games/${gameType}/${
+            gameType === "cars" ? "Image" : "Pics"
+         }/${i + 1}.jpg`,
+          matched: false,
+   }));
 }
