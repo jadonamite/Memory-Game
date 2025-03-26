@@ -17,7 +17,7 @@ export default function Game() {
    const [gameOver, setGameOver] = useState(false);
    const [isPlaying, setIsPlaying] = useState(false);
    const [isDarkMode, setIsDarkMode] = useState(false);
-   const [timeLeft, setTimeLeft] = useState(120);
+   const [timeLeft, setTimeLeft] = useState(0);
 
    const timersettings = {
       Beginner: 120,
@@ -37,7 +37,8 @@ export default function Game() {
       setMatched([]);
       setMoves(0);
       setGameOver(false);
-      setTimeLeft(timersettings[difficulty]);
+      setIsPlaying(false);
+      setTimeLeft(timersettings[difficulty]); // Moved timeleft logic to useEffect
       setIsPlaying(false);
    };
 

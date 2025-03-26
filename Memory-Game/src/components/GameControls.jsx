@@ -52,9 +52,9 @@ const GameControls = ({
                className={`px-3 py-2 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 ${
                   isPlaying ? "opacity-70 cursor-not-allowed" : "cursor-pointer"
                }`}>
-               <option value="slow">Beginner (2:00)</option>
-               <option value="normal">Pro (1:00)</option>
-               <option value="fast">Legends (0:30)</option>
+               <option value="Beginner">Beginner (2:00)</option>
+               <option value="Pro">Pro (1:00)</option>
+               <option value="Legend">Legends (0:30)</option>
             </select>
          </div>
 
