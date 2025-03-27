@@ -5,6 +5,7 @@ import GameControls from "./components/GameControls";
 import ThemeToggle from "./components/ThemeToggle";
 import Timer from "./components/Timer";
 import GameOver from "./components/GameOver";
+import LoadingPage from "./components/LoadingPage";
 import "./App.css";
 
 export default function Game() {
@@ -18,6 +19,7 @@ export default function Game() {
    const [isPlaying, setIsPlaying] = useState(false);
    const [isDarkMode, setIsDarkMode] = useState(false);
    const [timeLeft, setTimeLeft] = useState(0);
+   const [isLoading, setIsLoading] = useState(true);
 
    const timersettings = {
       Beginner: 120,
@@ -25,10 +27,21 @@ export default function Game() {
       Legend: 30,
    };
 
-   // Start game
+   // Loading effect
    useEffect(() => {
-      resetGame();
-   }, [gameType]);
+      const timer = setTimeout(() => {
+         setIsLoading(false);
+      }, 5000);
+
+      return () => clearTimeout(timer);
+   }, []);
+
+   // Game initialization effect
+   useEffect(() => {
+      if (!isLoading) {
+         resetGame();
+      }
+   }, [gameType, isLoading]);
 
    // Reset Game
    const resetGame = () => {
@@ -38,8 +51,7 @@ export default function Game() {
       setMoves(0);
       setGameOver(false);
       setIsPlaying(false);
-      setTimeLeft(timersettings[difficulty]); // Moved timeleft logic to useEffect
-      setIsPlaying(false);
+      setTimeLeft(timersettings[difficulty]);
    };
 
    // Initialize Cards
@@ -111,10 +123,17 @@ export default function Game() {
       document.documentElement.classList.toggle("dark");
    };
 
-   //effect to handle difficulty change
+   // Effect to handle difficulty change
    useEffect(() => {
-      resetGame();
-   }, [difficulty]);
+      if (!isLoading) {
+         resetGame();
+      }
+   }, [difficulty, isLoading]);
+
+   // Render method
+   if (isLoading) {
+      return <LoadingPage />;
+   }
 
    return (
       <div
