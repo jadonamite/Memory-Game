@@ -14,8 +14,8 @@ const Timer = ({ timeLeft, isPlaying }) => {
       <div
          className={`flex items-center gap-2 px-4 py-2 rounded-lg ${
             isPlaying
-               ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
-               : "bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+               ? "timerPlaying"
+               : "timerNotPlaying dark:timerNotPlayingDark"
          }`}>
          <Clock size={20} />
          <span className="font-mono text-lg font-bold">{formattedTime}</span>

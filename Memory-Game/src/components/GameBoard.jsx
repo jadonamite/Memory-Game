@@ -25,7 +25,7 @@ const GameBoard = ({
                   onClick={() => handleCardClick(card.id, card.key)}>
                   <div className="relative w-full h-full">
                      <motion.div
-                        className="absolute w-full h-full backface-hidden"
+                        className="absolute w-full h-full backface-hidden bg-red-500"
                         animate={{ rotateY: isFlipped || isMatched ? 180 : 0 }}
                         transition={{
                            duration: 0.6,

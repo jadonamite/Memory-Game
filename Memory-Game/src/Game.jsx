@@ -117,14 +117,16 @@ export default function Game() {
    }, [difficulty]);
 
    return (
-      <div
-         className={`min-h-screen transition-colors duration-300 ${
-            isDarkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"
-         }`}>
+      <div className={`transition-colors duration-200 layout`}>
          <div className="container mx-auto px-4 py-8">
-            <header className="flex justify-between items-center mb-8">
+            <header className="header">
                <h1 className="text-3xl font-bold">Memory Game</h1>
-               <ThemeToggle isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+               <div className="svg" onClick={toggleTheme}>
+                  <ThemeToggle
+                     isDarkMode={isDarkMode}
+                     toggleTheme={toggleTheme}
+                  />
+               </div>
             </header>
 
             <GameControls
@@ -136,7 +138,7 @@ export default function Game() {
                isPlaying={isPlaying}
             />
 
-            <div className="flex justify-between items-center mb-4">
+            <div className="underOptions">
                <div className="text-lg font-medium">Moves: {moves}</div>
                <Timer timeLeft={timeLeft} isPlaying={isPlaying} />
             </div>

@@ -12,6 +12,74 @@
    --foreground-rgb: 255, 255, 255;
    --background-start-rgb: 0, 0, 0;
    --background-end-rgb: 0, 0, 0;
+
+   .layout {
+      background-color: #1a1a2e;
+      color: #ffffff;
+   }
+
+   /* .resetButton {
+      background-color: #ff7043;
+   }
+
+   .resetButton :hover {
+      background-color: #ff7043;
+   } */
+}
+.layout {
+   background-color: #f8f3e7;
+   color: #333333;
+}
+.controls {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 1rem;
+   gap: 1.6rem;
+}
+.options {
+   display: flex;
+   gap: 2rem;
+}
+.underOptions {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 0.5rem;
+}
+.timerPlaying {
+   background-color: #bdbdbd;
+   color: #fff;
+}
+.timerNotPlaying {
+   background-color: #e63124;
+   color: #fff;
+}
+.timerNotPlayingDark {
+   background-color: #00a8e8;
+   color: #fff;
+}
+.selectOption {
+   padding: 0.5rem 0.75rem;
+   border-radius: 0.5rem;
+   outline: none;
+   box-shadow: 0 0 0 2px #ffa726;
+}
+
+.resetButton {
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   padding: 0.5rem 1rem;
+   border-radius: 0.5rem;
+   background-color: #e78b00;
+   color: white;
+   transition: all 150ms ease-in-out;
+}
+
+.resetButton :hover {
+   background-color: #faa019;
 }
 
 * {
@@ -21,4 +89,25 @@
    display: grid;
    grid-template-columns: repeat(4, minmax(0, 1fr));
    gap: 1rem;
+}
+.header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 2rem;
+   padding: 4rem 6rem;
+   border-bottom-right-radius: 999px;
+   border-bottom-left-radius: 999px;
+   position: relative;
+   top: -2rem;
+}
+
+.header .dark {
+   background-color: cadetblue;
+}
+.header .svg {
+   padding: 2rem;
+   background-color: #2c2c54;
+   color: black;
+   border-radius: 9999px;
 }
