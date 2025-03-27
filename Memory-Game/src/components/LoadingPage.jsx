@@ -10,6 +10,7 @@ const LoadingPage = () => {
             <div className="loading-footer">Built by Web3Nova</div>
          </div>
       </div>
-   )
+   );
+};
 
 export default LoadingPage;
