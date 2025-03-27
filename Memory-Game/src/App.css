@@ -1,20 +1,20 @@
 :root {
-   --dark-bg: #1a1a2e;
-   --light-bg: #ddcd9e;
-   --dark-text: #e7e1cd;
-   --light-text: #112250;
+   --dark-bg: #1e2b4d;
+   --light-bg: #f5f5f5;
+   --dark-text: #fff;
+   --light-text: #1e2b4d;
    --dark-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
    --light-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-   --card-bg-dark: #8a7948;
-   --card-text-dark: #1a1a2e;
-   --card-text-light: #6b5d2f;
+   --card-bg-dark: #4a5b7e;
+   --card-text-dark: #f7f7f7;
+   --card-text-light: #ffffff;
    --card-bg-light: #1a1a2e;
 }
 .backface-hidden {
    backface-visibility: hidden;
 }
 
-.layout {
+.layout-light {
    background-color: var(--light-bg);
    color: var(--light-text);
    transition: all 0.5s;
@@ -23,6 +23,10 @@
    background-color: var(--dark-bg);
    color: var(--dark-text);
    transition: all 0.5s;
+   height: 100%;
+}
+.dark body {
+   background-color: var(--dark-bg);
 }
 .card {
    width: 100%;
@@ -65,6 +69,7 @@
 .board {
    aspect-ratio: 1/1;
    background-size: contain;
+
    cursor: pointer;
    border-radius: 0.5rem;
    overflow: hidden;
@@ -95,8 +100,8 @@
    padding: 0.5rem 0.75rem;
    border-radius: 0.5rem;
    outline: none;
-   background-color: #f8f3e7; /* Light mode background */
-   color: #333333; /* Light mode text */
+   background-color: #f8f3e7;
+   color: #333333;
    border: 1px solid #e0e0e0;
    transition: all 0.3s ease;
 }
@@ -109,7 +114,7 @@
 }
 
 .selectOption:focus {
-   box-shadow: 0 0 0 2px #ffa726;
+   box-shadow: 0 0 0 2px #1e2b4d;
 }
 
 .selectOption:disabled {
@@ -121,30 +126,8 @@
    max-height: 12rem;
 }
 
-.resetButton {
-   display: flex;
-   align-items: center;
-   gap: 8px;
-   padding: 0.5rem 1rem;
-   border-radius: 0.5rem;
-   background-color: #e78b00;
-   color: white;
-   transition: all 150ms ease-in-out;
-}
-
-.resetButton :hover {
-   background-color: #faa019;
-}
-
 * {
    box-sizing: border-box;
-}
-.tiles-container {
-   display: grid;
-   grid-template-columns: repeat(4, minmax(0, 0.5fr));
-   gap: 1rem;
-   width: 70%;
-   margin: 2rem auto;
 }
 .header {
    display: flex;
@@ -167,45 +150,10 @@
    color: black;
    border-radius: 9999px;
 }
-@media (max-width: 570px) {
-   .header {
-      padding: 0;
-   }
-   .header .svg {
-      padding: 1rem;
-      background-color: #2c2c54;
-      border-radius: 9999px;
-      color: #2a8486b7;
-   }
-}
 .backface-hidden {
    backface-visibility: hidden;
 }
 
-:root {
-   --foreground-rgb: 0, 0, 0;
-   --background-start-rgb: 214, 219, 220;
-   --background-end-rgb: 255, 255, 255;
-}
-
-.dark {
-   --foreground-rgb: 255, 255, 255;
-   --background-start-rgb: 0, 0, 0;
-   --background-end-rgb: 0, 0, 0;
-
-   .layout {
-      background-color: #1a1a2e;
-      color: #ffffff;
-   }
-
-   /* .resetButton {
-      background-color: #ff7043;
-   }
-
-   .resetButton :hover {
-      background-color: #ff7043;
-   } */
-}
 .layout {
    background-color: #f8f3e7;
    color: #333333;
@@ -250,30 +198,26 @@
    max-width: 12rem;
    max-height: 12rem;
 }
-
 .resetButton {
    display: flex;
    align-items: center;
    gap: 8px;
-   padding: 0.5rem 1rem;
+   padding: 0.6rem 1.2rem;
    border-radius: 0.5rem;
-   background-color: #e78b00;
+   background-color: #1e2b4d;
    color: white;
    transition: all 150ms ease-in-out;
 }
 
 .resetButton :hover {
-   background-color: #faa019;
+   background-color: #213f8b;
 }
 
-* {
-   box-sizing: border-box;
-}
 .tiles-container {
    display: grid;
-   grid-template-columns: repeat(4, minmax(0, 0.5fr));
+   grid-template-columns: repeat(4, 1fr);
    gap: 1rem;
-   width: 70%;
+   width: 90%;
    margin: 2rem auto;
 }
 .header {
@@ -299,12 +243,26 @@
 }
 @media (max-width: 570px) {
    .header {
-      padding: 0;
+      padding: 2rem 0;
    }
    .header .svg {
       padding: 1rem;
       background-color: #2c2c54;
       border-radius: 9999px;
       color: #2a8486b7;
+   }
+
+   .tiles-container {
+      display: grid;
+      /* grid-template-columns: repeat(4, min(1fr)); */
+      gap: 0.5rem;
+      width: 95%;
+      min-height: 40vh;
+      margin: 1rem auto;
+      border: 1px solid red;
+   }
+   .board {
+      aspect-ratio: 1/1;
+      height: 100%;
    }
 }
