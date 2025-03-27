@@ -66,6 +66,10 @@
    outline: none;
    box-shadow: 0 0 0 2px #ffa726;
 }
+.contain {
+   max-width: 12rem;
+   max-height: 12rem;
+}
 
 .resetButton {
    display: flex;
@@ -87,8 +91,10 @@
 }
 .tiles-container {
    display: grid;
-   grid-template-columns: repeat(4, minmax(0, 1fr));
+   grid-template-columns: repeat(4, minmax(0, 0.5fr));
    gap: 1rem;
+   width: 70%;
+   margin: 2rem auto;
 }
 .header {
    display: flex;
@@ -110,4 +116,15 @@
    background-color: #2c2c54;
    color: black;
    border-radius: 9999px;
+}
+@media (max-width: 570px) {
+   .header {
+      padding: 0;
+   }
+   .header .svg {
+      padding: 1rem;
+      background-color: #2c2c54;
+      border-radius: 9999px;
+      color: #2a8486b7;
+   }
 }

@@ -117,7 +117,10 @@ export default function Game() {
    }, [difficulty]);
 
    return (
-      <div className={`transition-colors duration-200 layout`}>
+      <div
+         className={`transition-colors duration-200 ${
+            isDarkMode ? "bg-[#1a1a2e]  text-[#ffffff]" : " "
+         }`}>
          <div className="container mx-auto px-4 py-8">
             <header className="header">
                <h1 className="text-3xl font-bold">Memory Game</h1>
@@ -136,6 +139,7 @@ export default function Game() {
                setDifficulty={setDifficulty}
                resetGame={resetGame}
                isPlaying={isPlaying}
+               isDarkMode={isDarkMode}
             />
 
             <div className="underOptions">

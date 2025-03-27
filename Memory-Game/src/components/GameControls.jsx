@@ -8,6 +8,7 @@ const GameControls = ({
    setDifficulty,
    resetGame,
    isPlaying,
+   isDarkMode,
 }) => {
    const handleTypeChange = (e) => {
       if (!isPlaying) {

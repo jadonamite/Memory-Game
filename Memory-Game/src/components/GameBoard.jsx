@@ -18,14 +18,17 @@ const GameBoard = ({
             return (
                <motion.div
                   key={card.key}
-                  className={`aspect-square cursor-pointer rounded-lg overflow-hidden ${
-                     isDarkMode ? "shadow-blue-500/30" : "shadow-blue-500/20"
-                  } shadow-lg`}
+                  className={`aspect-square contain
+                     cursor-pointer rounded-lg overflow-hidden ${
+                        isDarkMode
+                           ? "shadow-[#2a8586b7]"
+                           : "shadow-[blue-500/2]0"
+                     } shadow-lg`}
                   whileHover={{ scale: isFlipped || isMatched ? 1 : 1.05 }}
                   onClick={() => handleCardClick(card.id, card.key)}>
                   <div className="relative w-full h-full">
                      <motion.div
-                        className="absolute w-full h-full backface-hidden bg-red-500"
+                        className="absolute w-full h-full backface-hidden "
                         animate={{ rotateY: isFlipped || isMatched ? 180 : 0 }}
                         transition={{
                            duration: 0.6,
@@ -36,7 +39,7 @@ const GameBoard = ({
                         style={{ transformStyle: "preserve-3d" }}>
                         <div
                            className={`w-full h-full ${
-                              isDarkMode ? "bg-[#021d11]" : "bg-[#69ccb6]"
+                              isDarkMode ? "bg-[#116466]" : "bg-[#a7d8f0]"
                            } rounded-lg flex items-center justify-center`}>
                            <span className="text-white text-4xl">?</span>
                         </div>
@@ -47,7 +50,7 @@ const GameBoard = ({
                         initial={{ rotateY: 180 }}
                         animate={{ rotateY: isFlipped || isMatched ? 0 : 180 }}
                         transition={{
-                           duration: 0.6,
+                           duration: 0.3,
                            type: "spring",
                            stiffness: 300,
                            damping: 20,
