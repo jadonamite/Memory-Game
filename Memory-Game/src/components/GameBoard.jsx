@@ -1,6 +1,7 @@
 // components/GameBoard.jsx
 import React from "react";
 import { motion } from "framer-motion";
+import "./../App.css";
 
 const GameBoard = ({
    cards,
@@ -18,42 +19,37 @@ const GameBoard = ({
             return (
                <motion.div
                   key={card.key}
-                  className={`aspect-square contain
-                     cursor-pointer rounded-lg overflow-hidden ${
-                        isDarkMode
-                           ? "shadow-[#2a8586b7]"
-                           : "shadow-[blue-500/2]0"
-                     } shadow-lg`}
+                  className="board"
                   whileHover={{ scale: isFlipped || isMatched ? 1 : 1.05 }}
                   onClick={() => handleCardClick(card.id, card.key)}>
-                  <div className="relative w-full h-full">
+                  <div className="contained">
                      <motion.div
-                        className="absolute w-full h-full backface-hidden "
+                        className="maintain backface-hidden "
                         animate={{ rotateY: isFlipped || isMatched ? 180 : 0 }}
                         transition={{
-                           duration: 0.6,
+                           duration: 0.3,
                            type: "spring",
-                           stiffness: 300,
-                           damping: 20,
+                           stiffness: 200,
+                           damping: 15,
                         }}
                         style={{ transformStyle: "preserve-3d" }}>
                         <div
-                           className={`w-full h-full ${
-                              isDarkMode ? "bg-[#116466]" : "bg-[#a7d8f0]"
-                           } rounded-lg flex items-center justify-center`}>
+                           className={`card ${
+                              isDarkMode ? "card-dark" : "card-light"
+                           }`}>
                            <span className="text-white text-4xl">?</span>
                         </div>
                      </motion.div>
 
                      <motion.div
-                        className="absolute w-full h-full backface-hidden"
+                        className="maintain backface-hidden"
                         initial={{ rotateY: 180 }}
                         animate={{ rotateY: isFlipped || isMatched ? 0 : 180 }}
                         transition={{
                            duration: 0.3,
                            type: "spring",
-                           stiffness: 300,
-                           damping: 20,
+                           stiffness: 200,
+                           damping: 15,
                         }}
                         style={{ transformStyle: "preserve-3d" }}>
                         <img

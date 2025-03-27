@@ -1,3 +1,183 @@
+:root {
+   --dark-bg: #1a1a2e;
+   --light-bg: #ddcd9e;
+   --dark-text: #e7e1cd;
+   --light-text: #112250;
+   --dark-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+   --light-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   --card-bg-dark: #8a7948;
+   --card-text-dark: #1a1a2e;
+   --card-text-light: #6b5d2f;
+   --card-bg-light: #1a1a2e;
+}
+.backface-hidden {
+   backface-visibility: hidden;
+}
+
+.layout {
+   background-color: var(--light-bg);
+   color: var(--light-text);
+   transition: all 0.5s;
+}
+.layout-dark {
+   background-color: var(--dark-bg);
+   color: var(--dark-text);
+   transition: all 0.5s;
+}
+.card {
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 0.5rem;
+}
+.card-light {
+   background-color: var(--card-bg-light);
+   color: var(--card-text-light);
+   border: 1px solid var(--light-bg);
+   box-shadow: var(--light-shadow);
+}
+.card-dark {
+   background-color: var(--card-bg-dark);
+   color: var(--card-text-dark);
+   border: 1px solid var(--dark-text);
+   box-shadow: var(--dark-shadow);
+}
+.controls {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 1rem;
+   gap: 1.6rem;
+}
+.options {
+   display: flex;
+   gap: 2rem;
+}
+.underOptions {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 0.5rem;
+}
+.board {
+   aspect-ratio: 1/1;
+   background-size: contain;
+   cursor: pointer;
+   border-radius: 0.5rem;
+   overflow: hidden;
+}
+.maintain {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+}
+.contained {
+   position: relative;
+   width: 100%;
+   height: 100%;
+}
+.timerPlaying {
+   background-color: #bdbdbd;
+   color: #fff;
+}
+.timerNotPlaying {
+   background-color: #e63124;
+   color: #fff;
+}
+.timerNotPlayingDark {
+   background-color: #00a8e8;
+   color: #fff;
+}
+.selectOption {
+   padding: 0.5rem 0.75rem;
+   border-radius: 0.5rem;
+   outline: none;
+   background-color: #f8f3e7; /* Light mode background */
+   color: #333333; /* Light mode text */
+   border: 1px solid #e0e0e0;
+   transition: all 0.3s ease;
+}
+
+/* Dark mode styling */
+.dark .selectOption {
+   background-color: #2c2c54; /* Dark mode background */
+   color: #ffffff; /* Dark mode text */
+   border: 1px solid #4a4a6a;
+}
+
+.selectOption:focus {
+   box-shadow: 0 0 0 2px #ffa726;
+}
+
+.selectOption:disabled {
+   opacity: 0.7;
+   cursor: not-allowed;
+}
+.contain {
+   max-width: 12rem;
+   max-height: 12rem;
+}
+
+.resetButton {
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   padding: 0.5rem 1rem;
+   border-radius: 0.5rem;
+   background-color: #e78b00;
+   color: white;
+   transition: all 150ms ease-in-out;
+}
+
+.resetButton :hover {
+   background-color: #faa019;
+}
+
+* {
+   box-sizing: border-box;
+}
+.tiles-container {
+   display: grid;
+   grid-template-columns: repeat(4, minmax(0, 0.5fr));
+   gap: 1rem;
+   width: 70%;
+   margin: 2rem auto;
+}
+.header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 2rem;
+   padding: 4rem 6rem;
+   border-bottom-right-radius: 999px;
+   border-bottom-left-radius: 999px;
+   position: relative;
+   top: -2rem;
+}
+
+.header .dark {
+   background-color: cadetblue;
+}
+.header .svg {
+   padding: 2rem;
+   background-color: #2c2c54;
+   color: black;
+   border-radius: 9999px;
+}
+@media (max-width: 570px) {
+   .header {
+      padding: 0;
+   }
+   .header .svg {
+      padding: 1rem;
+      background-color: #2c2c54;
+      border-radius: 9999px;
+      color: #2a8486b7;
+   }
+}
 .backface-hidden {
    backface-visibility: hidden;
 }

@@ -119,7 +119,7 @@ export default function Game() {
    return (
       <div
          className={`transition-colors duration-200 ${
-            isDarkMode ? "bg-[#1a1a2e]  text-[#ffffff]" : " "
+            isDarkMode ? "layout-dark" : "layout-light"
          }`}>
          <div className="container mx-auto px-4 py-8">
             <header className="header">
