@@ -192,6 +192,7 @@
    padding: 0.5rem 0.75rem;
    border-radius: 0.5rem;
    outline: none;
+   box-shadow: 0 2px 2px 2px #1e2b4d5b;
 }
 .contain {
    max-width: 12rem;
@@ -210,6 +211,7 @@
 
 .resetButton-dark {
    border: 1px solid var(--light-bg);
+   box-shadow: 0 2px 2px 2px #70858db2;
 }
 
 .resetButton :hover {
@@ -218,8 +220,8 @@
 .ctrl {
    border: 1px solid #1e2b4d;
 }
-.ctrl .dark {
-   border: 1px solid var(--light-bg);
+.ctrl-btn-dark {
+   box-shadow: 0 0 0 2px var(--light-bg);
 }
 
 .tiles-container {
