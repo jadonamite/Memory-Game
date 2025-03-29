@@ -198,7 +198,17 @@
    max-width: 12rem;
    max-height: 12rem;
 }
-.resetButton {
+.resetButton-light {
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   padding: 0.6rem 1.2rem;
+   border-radius: 0.5rem;
+   background-color: #1e2b4d;
+   color: white;
+   transition: all 150ms ease-in-out;
+}
+.resetButton-dark {
    display: flex;
    align-items: center;
    gap: 8px;
