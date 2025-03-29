@@ -173,7 +173,7 @@
 
 .resetButton-dark {
    border: 1px solid var(--light-bg);
-   box-shadow: 0 2px 2px 2px #70858db2;
+   box-shadow: 0 2px 2px 2px #000000b2;
 }
 
 .resetButton :hover {

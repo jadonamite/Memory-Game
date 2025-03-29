@@ -29,7 +29,11 @@
    height: 100px;
    background-color: #4a5b7e;
    animation: pulse 1.5s infinite ease-in-out;
-   border-radius: 0.5rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 0.5rem;
+   border-radius: 0.3rem;
 }
 
 @keyframes pulse {

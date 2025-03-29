@@ -35,7 +35,7 @@ const GameControls = ({
                   value={gameType}
                   onChange={handleTypeChange}
                   disabled={isPlaying}
-                  className={`selectOption ${
+                  className={`ctrl selectOption ${
                      isPlaying
                         ? "opacity-70 cursor-not-allowed"
                         : "cursor-pointer"
