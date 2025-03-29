@@ -1,5 +1,6 @@
 import React from "react";
 import { RefreshCcw } from "lucide-react";
+import "./../App.css";
 
 const GameControls = ({
    gameType,
@@ -57,14 +58,20 @@ const GameControls = ({
                      isPlaying
                         ? "opacity-70 cursor-not-allowed"
                         : "cursor-pointer"
-                  }`}>
+                  }
+                  ctrl ${isDarkMode ? "ctrl-Button-dark" : "ctrlButton-light"}
+                  `}>
                   <option value="Beginner">Beginner (2:00)</option>
                   <option value="Pro">Pro (1:00)</option>
                   <option value="Legend">Legends (0:30)</option>
                </select>
             </div>
          </div>
-         <button onClick={resetGame} className="resetButton">
+         <button
+            onClick={resetGame}
+            className={`reset ${
+               isDarkMode ? "resetButton-dark" : "resetButton-light"
+            }`}>
             <RefreshCcw size={18} />
             Reset
          </button>

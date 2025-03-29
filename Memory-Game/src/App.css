@@ -181,7 +181,7 @@
    color: #fff;
 }
 .timerNotPlaying {
-   background-color: #e63124;
+   background-color: #cc5148;
    color: #fff;
 }
 .timerNotPlayingDark {
@@ -192,23 +192,12 @@
    padding: 0.5rem 0.75rem;
    border-radius: 0.5rem;
    outline: none;
-   box-shadow: 0 0 0 2px #ffa726;
 }
 .contain {
    max-width: 12rem;
    max-height: 12rem;
 }
-.resetButton-light {
-   display: flex;
-   align-items: center;
-   gap: 8px;
-   padding: 0.6rem 1.2rem;
-   border-radius: 0.5rem;
-   background-color: #1e2b4d;
-   color: white;
-   transition: all 150ms ease-in-out;
-}
-.resetButton-dark {
+.reset {
    display: flex;
    align-items: center;
    gap: 8px;
@@ -219,8 +208,18 @@
    transition: all 150ms ease-in-out;
 }
 
+.resetButton-dark {
+   border: 1px solid var(--light-bg);
+}
+
 .resetButton :hover {
    background-color: #213f8b;
+}
+.ctrl {
+   border: 1px solid #1e2b4d;
+}
+.ctrl .dark {
+   border: 1px solid var(--light-bg);
 }
 
 .tiles-container {
