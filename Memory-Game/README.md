@@ -173,7 +173,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is not licensed under the any License - I dont tink i have tat part thought out tho
+This project is not licensed under the any License - I dont tink i have that part thought out tho
 .
 
 ---
