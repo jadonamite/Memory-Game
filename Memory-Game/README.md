@@ -173,7 +173,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is not licensed under the any License - I dont tink i have tat part thought out tho
+.
 
 ---
 
