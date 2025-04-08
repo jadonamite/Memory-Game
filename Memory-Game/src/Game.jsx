@@ -70,6 +70,25 @@ export default function Game() {
 
       return shuffledCards;
    };
+   const initializeAdditionalCards = () => {
+      const cardImages = Array.from({ length: 8 }, (_, i) => ({
+         id: i,
+         image: `assets/Games/${gameType}/${
+            gameType === "cars"
+               ? "Image"
+               : gameType === "arts"
+               ? "Pic"
+               : "Chads"
+         }${i + 1}.jpg`,
+         matched: false,
+      }));
+
+      const shuffledCards = [...cardImages, ...cardImages]
+         .map((card) => ({ ...card, key: Math.random() }))
+         .sort(() => Math.random() - 0.5);
+
+      return shuffledCards;
+   };
 
    // Handle Card Click
    const handleCardClick = (id, key) => {
